@@ -51,7 +51,7 @@ const Search = () => {
                     <input type="search" className="form-control" placeholder="Search blogs" onChange={handleChange} />
                 </div>
 
-                <div className="col-md-2">
+                <div className="col-md-2 pb-4">
                     <button className="btn btn-block btn-outline-primary" type="submit">
                         Search
                     </button>

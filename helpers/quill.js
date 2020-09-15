@@ -1,3 +1,6 @@
+
+
+
 export const QuillModules = {
     toolbar: [
         [{ header: [1 ,2 ,3, 4, 5, 6] },{ font: [] },{ size: [] }],

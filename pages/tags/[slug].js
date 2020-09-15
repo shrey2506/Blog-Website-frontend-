@@ -27,6 +27,9 @@ const Tag = ({ tag, blogs, query }) => {
             <meta property="fb:app_id" content={`${FB_APP_ID}`} />
         </Head>
     );
+     
+    
+   
 
     return (
         <React.Fragment>
@@ -36,14 +39,15 @@ const Tag = ({ tag, blogs, query }) => {
                     <div className="container-fluid text-left">
                         <header>
                             <div className="col-md-12 pt-3">
-                            <div className="display-3  text-muted pb-2" style={{"font-size": '4vh'}}>{tag.name}</div>
-                                {  
-                                blogs.map((b, i) => (
-                                    <div>
-                                        <Card key={i} blog={b} />
-                                        <hr />
-                                    </div>
-                                ))}
+                                <div className="display-3  text-muted pb-2" style={{ "font-size": '4vh' }}>{tag.name}</div>
+                                {
+                                    blogs.map((b, i) => (
+                                        <div>
+                                            <Card key={i} blog={b} />
+                                            <hr />
+                                        </div>
+                                    ))}
+                                {/* {!tag.blogs.length && 'No blogs'} */}
                             </div>
                         </header>
                     </div>

@@ -7,6 +7,7 @@ import { getCookie, isAuth } from '../../actions/auth';
 import { getCategories } from '../../actions/category';
 import { getTags } from '../../actions/tag';
 import { createBlog } from '../../actions/blog';
+
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import '../../node_modules/react-quill/dist/quill.snow.css';
 import { QuillModules, QuillFormats } from '../../helpers/quill';
@@ -24,6 +25,8 @@ const CreateBlog = ({ router }) => {
         }
     };
 
+   
+
     const [categories, setCategories] = useState([]);
     const [tags, setTags] = useState([]);
 
@@ -37,10 +40,11 @@ const CreateBlog = ({ router }) => {
         success: '',
         formData: '',
         title: '',
-        hidePublishButton: false
+        hidePublishButton: false,
+        loading: false
     });
 
-    const { error, sizeError, success, formData, title, hidePublishButton } = values;
+    const { error, sizeError, success, formData, title, hidePublishButton , loading} = values;
     const token = getCookie('token');
 
     useEffect(() => {
@@ -98,13 +102,14 @@ const CreateBlog = ({ router }) => {
     };
 
     const publishBlog = e => {
+        setValues({...values, loading:true})
         e.preventDefault();
         // console.log('ready to publishBlog');
         createBlog(formData, token).then(data => {
             if (data.error) {
-                setValues({ ...values, error: data.error });
+                setValues({ ...values, error: data.error, loading:false });
             } else {
-                setValues({ ...values, title: '', error: '', success: `A new blog titled "${data.title}" is created` });
+                setValues({ ...values,loading:false, title: '', error: '', success: `A new blog titled "${data.title}" is created` });
                 setBody('');
                 
             }
@@ -198,6 +203,12 @@ const CreateBlog = ({ router }) => {
         </div>
     );
 
+    const showLoading = () => (
+        <div className="alert alert-info" style={{ display: loading ? '' : 'none' }}>
+            Loading...
+        </div>
+    );
+
     
 
    
@@ -232,20 +243,13 @@ const CreateBlog = ({ router }) => {
     return (
         <div className="container-fluid pb-5">
             <div className="row">
-                <div className="col-md-8">
-                    {createBlogForm()}
-                    <div className="pt-3">
-                        {showError()}
-                        {showSuccess()}
-                    </div>
-                </div>
 
-                <div className="col-md-4">
+            <div className="col-md-4">
                     <div>
                         <div className="form-group ">
                             <h5>Featured image</h5>
                             <hr />
-                            <div className="card " style={{height: 200, width:200}}>
+                            <div className="card " style={{height: 200, width: 200}}>
                                     <div className="card-image text-center">
                                     {previewUrl && <img style={{height:200,width:200}} src={previewUrl} alt='Preview'  />}
                                     {!previewUrl && <p>Please pick an image</p>}
@@ -272,6 +276,18 @@ const CreateBlog = ({ router }) => {
                         <ul style={{ maxHeight: '200px', overflowY: 'scroll' }}>{showTags()}</ul>
                     </div>
                 </div>
+
+                <div className="col-md-8">
+                    <div className="pt-3">
+                        {showLoading()}
+                        {showError()}
+                        {showSuccess()}
+                    </div>
+                    {createBlogForm()}
+                   
+                </div>
+
+             
             </div>
         </div>
     );

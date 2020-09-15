@@ -21,6 +21,7 @@
     "nprogress": "^0.2.0",
     "prop-types": "^15.7.2",
     "query-string": "^6.13.1",
+    "quill-image-drop-module": "^1.0.3",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-native-image-picker": "^2.3.3",

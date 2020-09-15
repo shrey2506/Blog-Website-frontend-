@@ -31,11 +31,11 @@ const Category=({category,blogs,query})=>{
     
 
     const showAllBlogs=()=>{
-        if(blogs.map==null){
-            return <div className=" display-4 text-muted " style={{"font-size": '4vh'}}>
-                      No blogs are found with the following category
-            </div>
-        }
+        // if(blogs.categories.length){
+        //     return <div className=" display-4 text-muted " style={{"font-size": '4vh'}}>
+        //               No blogs are found with the following category
+        //     </div>
+        // }
         return blogs.map((blog, i) => {
             // ()
             return (
