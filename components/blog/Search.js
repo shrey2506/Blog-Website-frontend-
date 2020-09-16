@@ -1,30 +1,41 @@
 import Link from 'next/link';
 import renderHTML from 'react-render-html';
-import { useState, useEffect } from 'react';
+import { useState, useEffect,Component } from 'react';
 import { listSearch } from '../../actions/blog';
+
 import './Search';
+
+
 
 const Search = () => {
     const [values, setValues] = useState({
         search: undefined,
         results: [],
         searched: false,
-        message: ''
+        message: '',
+       
     });
 
-    const { search, results, searched, message } = values;
+    const { search, results, searched, message} = values;
 
     const searchSubmit = e => {
         e.preventDefault();
+       
         listSearch({ search }).then(data => {
             setValues({ ...values, results: data, searched: true, message: `${data.length} blogs found` });
         });
     };
 
+   
+
     const handleChange = e => {
         // console.log(e.target.value);
         setValues({ ...values, search: e.target.value, searched: false, results: [] });
+        
     };
+
+    
+    
 
     const searchedBlogs = (results = []) => {
         return (
@@ -57,6 +68,7 @@ const Search = () => {
                     </button>
                 </div>
             </div>
+            
         </form>
     );
 

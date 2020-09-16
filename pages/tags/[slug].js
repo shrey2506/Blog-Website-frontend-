@@ -28,7 +28,33 @@ const Tag = ({ tag, blogs, query }) => {
         </Head>
     );
      
-    
+    // console.log(blogs.length)
+
+    const showAllBlogs=()=>{
+        if(blogs.length===0){
+            return(
+            <React.Fragment>
+                <div style={{ "font-size": '3vh' }} className="text-muted">No blogs found with tag {tag.name}</div>
+                <a style={{ "font-size": '3vh' }} href="/blogs">Explore Other Blogs</a>
+            </React.Fragment>
+            
+            )
+        }
+       
+        else{
+            return blogs.map((blog, i) => {
+           
+                // ()
+                return (
+                    <article key={i}>
+                        <Card blog={blog} />
+                        <hr />
+                    </article>
+                );
+            });
+        }
+       
+    }
    
 
     return (
@@ -39,15 +65,17 @@ const Tag = ({ tag, blogs, query }) => {
                     <div className="container-fluid text-left">
                         <header>
                             <div className="col-md-12 pt-3">
-                                <div className="display-3  text-muted pb-2" style={{ "font-size": '4vh' }}>{tag.name}</div>
+                                <div className="display-3  text-muted pb-2" style={{ "font-size": '6vh' }}>{tag.name}</div>
                                 {
-                                    blogs.map((b, i) => (
-                                        <div>
-                                            <Card key={i} blog={b} />
-                                            <hr />
-                                        </div>
-                                    ))}
-                                {/* {!tag.blogs.length && 'No blogs'} */}
+                                    // blogs.map((b, i) => (
+                                    //     <div>
+                                    //         <Card key={i} blog={b} />
+                                    //         <hr />
+                                    //     </div>
+                                    // )) 
+                                    showAllBlogs()
+                                    }
+                               
                             </div>
                         </header>
                     </div>

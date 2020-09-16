@@ -31,20 +31,28 @@ const Category=({category,blogs,query})=>{
     
 
     const showAllBlogs=()=>{
-        // if(blogs.categories.length){
-        //     return <div className=" display-4 text-muted " style={{"font-size": '4vh'}}>
-        //               No blogs are found with the following category
-        //     </div>
-        // }
-        return blogs.map((blog, i) => {
-            // ()
-            return (
-                <article key={i}>
-                    <Card blog={blog} />
-                    <hr />
-                </article>
-            );
-        });
+        if(blogs.length===0){
+            return(
+                <React.Fragment>
+                    <div style={{ "font-size": '3vh' }} className="text-muted">No blogs found with tag {category.name}</div>
+                    <a style={{ "font-size": '3vh' }} href="/blogs">Explore Other Blogs</a>
+                </React.Fragment>
+            )
+        }
+       
+        else{
+            return blogs.map((blog, i) => {
+           
+                // ()
+                return (
+                    <article key={i}>
+                        <Card blog={blog} />
+                        <hr />
+                    </article>
+                );
+            });
+        }
+       
     }
     return(
         <React.Fragment>
@@ -54,9 +62,9 @@ const Category=({category,blogs,query})=>{
                     <div className="container-fluid text-left">
                          <header>
                              <div className="col-md-12 pt-2 pb-10">
-                                <div className="display-3  text-muted pb-2" style={{"font-size": '4vh'}}>{category.name}</div>
+                                <div className="display-3  text-muted pb-2" style={{"font-size": '6vh'}}>{category.name}</div>
                                 {showAllBlogs()}
-                               
+                                 
                              </div>
                          </header>
                     </div>
