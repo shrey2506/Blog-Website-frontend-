@@ -1,7 +1,9 @@
 import Link from 'next/link';
 import renderHTML from 'react-render-html';
-import { useState, useEffect,Component } from 'react';
+import { useState, useEffect, Component } from 'react';
 import { listSearch } from '../../actions/blog';
+import '../../static/css/styles.css'
+
 
 import './Search';
 
@@ -13,34 +15,35 @@ const Search = () => {
         results: [],
         searched: false,
         message: '',
-       
+
     });
 
-    const { search, results, searched, message} = values;
+    const { search, results, searched, message } = values;
 
-    const searchSubmit = e => {
+    const searchSubmit =e=> {
         e.preventDefault();
-       
-        listSearch({ search }).then(data => {
+        
+        listSearch({ search}).then(data => {
             setValues({ ...values, results: data, searched: true, message: `${data.length} blogs found` });
         });
     };
 
-   
 
+    
     const handleChange = e => {
+        e.preventDefault();
         // console.log(e.target.value);
         setValues({ ...values, search: e.target.value, searched: false, results: [] });
-        
+       
+          
+ 
+       
     };
-
     
-    
-
     const searchedBlogs = (results = []) => {
         return (
-            <div className="jumbotron bg-white">
-                {message && <p className="pt-4 text-muted font-italic">{message}</p>}
+            <div className="jumbotron bg-white ">
+                {message && <p className=" text-muted font-italic">{message}</p>}
 
                 {results.map((blog, i) => {
                     return (
@@ -55,27 +58,35 @@ const Search = () => {
         );
     };
 
+
+
+   
+
     const searchForm = () => (
         <form onSubmit={searchSubmit}>
             <div className="row">
-                <div className="col-md-10">
-                    <input type="search" className="form-control" placeholder="Search blogs" onChange={handleChange} />
-                </div>
 
-                <div className="col-md-2 pb-4">
-                    <button className="btn btn-block btn-outline-primary" type="submit">
-                        Search
-                    </button>
-                </div>
+               <div className="col-md-4 buttonIn">
+                    <input id="search" type="search" className="form-control" placeholder="Search blogs" onChange={handleChange} />
+                    {/* <button id="search-button"  type="submit">
+                            <img style={{width: 20, height: 20}} src='../../static/images/search.png' />
+                        </button> */}
+
+
+                </div> 
+               
+
+
             </div>
-            
+
         </form>
     );
 
     return (
-        <div className="container-fluid">
-            <div className="pt-3 pb-5">{searchForm()}</div>
-            {searched && <div style={{ marginTop: '-120px', marginBottom: '-80px' }}>{searchedBlogs(results)}</div>}
+        <div >
+            <div className="pl-2 pt-2 pb-2 pr-2">{searchForm()}</div>
+ 
+            {searched && <div > {searchedBlogs(results)} </div>}
         </div>
     );
 };

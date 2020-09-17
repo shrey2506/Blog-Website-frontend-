@@ -20,6 +20,7 @@ import {
 import '.././node_modules/nprogress/nprogress.css';
 import Search from './blog/Search';
 
+
 Router.onRouteChangeStart = url => NProgress.start();
 Router.onRouteChangeComplete = url => NProgress.done();
 Router.onRouteChangeError = url => NProgress.done();
@@ -35,23 +36,25 @@ const Header = () => {
     <React.Fragment>
       <Navbar color="light" light expand="md">
         <Link href="/">
-          <NavLink className="font-weight-bold">{APP_NAME}</NavLink>
+          <NavLink className="font-weight-bold ml-1">{APP_NAME}</NavLink>
         </Link>
+
         
+
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
-           
+
 
             <React.Fragment>
-              <NavItem>
+              {/* <NavItem>
                 <Link href="/blogs">
                   <NavLink>Blogs</NavLink>
                 </Link>
-              </NavItem>
-              
-             
-              
+              </NavItem> */}
+
+
+
             </React.Fragment>
 
             {!isAuth() && (
@@ -92,11 +95,11 @@ const Header = () => {
                 </NavLink>
               </NavItem>
             )}
-              { isAuth() &&<NavItem>
-               
-                  <a href="/user/crud/blog" className="btn btn-primary text-light">Write a blog</a>
-               
-              </NavItem>}
+            {isAuth() && <NavItem>
+
+              <a href="/user/crud/blog" className="btn btn-primary text-light">Write a blog</a>
+
+            </NavItem>}
           </Nav>
         </Collapse>
       </Navbar>

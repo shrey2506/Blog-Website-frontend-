@@ -10,9 +10,18 @@ import { singleBlog, updateBlog } from '../../actions/blog';
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import '../../node_modules/react-quill/dist/quill.snow.css';
 import { QuillModules, QuillFormats } from '../../helpers/quill';
+import NProgress from 'nprogress';
+import '../../node_modules/nprogress/nprogress.css';
 import { API } from '../../config';
 
 const BlogUpdate = ({ router }) => {
+
+    Router.onRouteChangeStart = url => NProgress.start();
+    Router.onRouteChangeComplete = url => NProgress.done();
+    Router.onRouteChangeError = url => NProgress.done();
+
+
+
     const [body, setBody] = useState('');
 
     const [categories, setCategories] = useState([]);
@@ -54,6 +63,32 @@ const BlogUpdate = ({ router }) => {
             });
         }
     };
+
+    const [file,setFile]=useState();
+    const [previewUrl,setPreviewUrl]=useState();
+
+   
+
+    useEffect(()=>{
+        try{
+            if(!file){
+                return;
+            }else{
+               const fileReader=new FileReader();
+            
+               fileReader.onload=()=>{
+                   setPreviewUrl(fileReader.result);
+                   
+               }
+               fileReader.readAsDataURL(file);
+               
+            }
+        }catch(err){
+            console.log(err)
+        }
+       
+         
+    },[file,previewUrl]);
 
     const setCategoriesArray = blogCategories => {
         let ca = [];
@@ -180,6 +215,7 @@ const BlogUpdate = ({ router }) => {
         const value = name === 'photo' ? e.target.files[0] : e.target.value;
         formData.set(name, value);
         setValues({ ...values, [name]: value, formData, error: '' });
+        setFile(value);
     };
 
     const handleBody = e => {
@@ -247,26 +283,26 @@ const BlogUpdate = ({ router }) => {
     return (
         <div className="container-fluid pb-5">
             <div className="row">
-                <div className="col-md-8">
-                    {updateBlogForm()}
 
-                    <div className="pt-3">
-                        {showSuccess()}
-                        {showError()}
-                    </div>
-
-                    {body && (
-                        <img src={`${API}/blog/photo/${router.query.slug}`} alt={title} style={{ width: '100%' }} />
-                    )}
-                </div>
-
-                <div className="col-md-4">
+                <div className="col-md-4 pt-4">
                     <div>
                         <div className="form-group pb-2">
+                            <div className="card " style={{ height: 200, width: 200 }}>
+                                
+                                    {
+                                        body && (
+                                            <div className="card-image">
+                                               {!previewUrl&& <img src={`${API}/blog/photo/${router.query.slug}`} alt={title} style={{ height: 200, width: 200 }} />}
+                                               {previewUrl && <img style={{height:200,width:200}} src={previewUrl} alt='Preview'  />}
+                                            </div> 
+                                   
+                                        )}
+                                
+                            </div>
                             <h5>Featured image</h5>
                             <hr />
 
-                            <small className="text-muted">Max size: 1mb</small>
+                            <small className="text-muted">Max size: 5mb</small>
                             <br />
                             <label className="btn btn-outline-info">
                                 Upload featured image
@@ -286,6 +322,20 @@ const BlogUpdate = ({ router }) => {
                         <ul style={{ maxHeight: '200px', overflowY: 'scroll' }}>{showTags()}</ul>
                     </div>
                 </div>
+
+                <div className="col-md-8">
+
+                    {updateBlogForm()}
+
+                    <div className="pt-3">
+                        {showSuccess()}
+                        {showError()}
+                    </div>
+
+
+                </div>
+
+
             </div>
         </div>
     );

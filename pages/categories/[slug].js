@@ -34,8 +34,14 @@ const Category=({category,blogs,query})=>{
         if(blogs.length===0){
             return(
                 <React.Fragment>
-                    <div style={{ "font-size": '3vh' }} className="text-muted">No blogs found with tag {category.name}</div>
-                    <a style={{ "font-size": '3vh' }} href="/blogs">Explore Other Blogs</a>
+                    <div className="card">
+                        <div className="card-body">
+                                <div style={{ "font-size": '3vh' }} className="text-muted">No blogs found with  {category.name}</div>
+                                <a style={{ "font-size": '3vh' }} href="/blogs">Explore Other Blogs</a>
+                        </div>
+
+                    </div>
+                    
                 </React.Fragment>
             )
         }
@@ -59,10 +65,10 @@ const Category=({category,blogs,query})=>{
             {head()}
             <Layout>
                 <main>
-                    <div className="container-fluid text-left">
+                    <div className="container-fluid text-left pt-5">
                          <header>
                              <div className="col-md-12 pt-2 pb-10">
-                                <div className="display-3  text-muted pb-2" style={{"font-size": '6vh'}}>{category.name}</div>
+                                {blogs.length!==0&&<div className="display-3  text-muted pb-2" style={{"font-size": '6vh'}}>{category.name}</div>}
                                 {showAllBlogs()}
                                  
                              </div>

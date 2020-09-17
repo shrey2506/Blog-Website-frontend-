@@ -108,10 +108,16 @@ const CreateBlog = ({ router }) => {
         createBlog(formData, token).then(data => {
             if (data.error) {
                 setValues({ ...values, error: data.error, loading:false });
-            } else {
-                setValues({ ...values,loading:false, title: '', error: '', success: `A new blog titled "${data.title}" is created` });
-                setBody('');
-                
+            } 
+            setValues({ ...values,loading:false, title: '', error: '', success: `A new blog titled "${data.title}" is created` });
+                setBody('');  
+          
+            if (isAuth() && isAuth().role === 1) {
+                // Router.replace(`/admin/crud/${router.query.slug}`);
+                Router.replace(`/admin`);
+            } else if (isAuth() && isAuth().role === 0) {
+                // Router.replace(`/user/crud/${router.query.slug}`);
+                Router.replace(`/user`);
             }
         });
     };
