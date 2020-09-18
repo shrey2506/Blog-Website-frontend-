@@ -22,7 +22,7 @@ const Search = () => {
 
     const searchSubmit =e=> {
         e.preventDefault();
-        
+       
         listSearch({ search}).then(data => {
             setValues({ ...values, results: data, searched: true, message: `${data.length} blogs found` });
         });
@@ -32,13 +32,10 @@ const Search = () => {
     
     const handleChange = e => {
         e.preventDefault();
-        // console.log(e.target.value);
         setValues({ ...values, search: e.target.value, searched: false, results: [] });
-       
-          
- 
-       
     };
+
+    
     
     const searchedBlogs = (results = []) => {
         return (
@@ -67,12 +64,10 @@ const Search = () => {
             <div className="row">
 
                <div className="col-md-4 buttonIn">
-                    <input id="search" type="search" className="form-control" placeholder="Search blogs" onChange={handleChange} />
+                    <input id="search"  type="search" className="form-control" placeholder="Search blogs" onChange={handleChange} />
                     {/* <button id="search-button"  type="submit">
                             <img style={{width: 20, height: 20}} src='../../static/images/search.png' />
                         </button> */}
-
-
                 </div> 
                
 

@@ -87,7 +87,7 @@ const SingleBlog = ({ blog, query }) => {
             <Layout>
                 <main>
                     <article>
-                        <div className="container-fluid">
+                        <div className="container-fluid pt-5">
                             <section>
                                 <div className="row" style={{ marginTop: '-30px', height: 'auto', width: '50%', marginLeft: 'auto', marginRight: 'auto', display: 'block' }}>
                                    

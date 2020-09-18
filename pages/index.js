@@ -105,7 +105,7 @@ const Blogs = ({ blogs, categories, tags, totalBlogs, blogsLimit, blogSkip, rout
                     <div className="container-fluid">
                         <header>
                             <div className="col-md-12 pt-3">
-                                <h1 className="display-4 font-weight-bold text-center text-muted" style={{"font-size": '5vh'}}>
+                                <h1 className="display-4 font-weight-bold text-center text-muted" style={{fontSize: '5vh'}}>
                                     Programming blogs and tutorials
                                 </h1>
                             </div>

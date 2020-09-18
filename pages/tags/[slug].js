@@ -37,7 +37,7 @@ const Tag = ({ tag, blogs, query }) => {
                 <div className="card">
                     <div className="card-body">
                         <div style={{ "font-size": '3vh' }} className="text-muted">No blogs found with  {tag.name}</div>
-                        <a style={{ "font-size": '3vh' }} href="/blogs">Explore Other Blogs</a>
+                        <a style={{ "font-size": '3vh' }} href="/">Explore Other Blogs</a>
                     </div>
                 </div>
               
