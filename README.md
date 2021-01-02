@@ -8,6 +8,6 @@ Technologies used:
 
 
 A multiuser Blogging Platform catering towards coding and developemnt.
-Check it out: http://139.59.12.254/
+Check it out: http://67.205.141.168/
 
 For running the project locally run npm install 
