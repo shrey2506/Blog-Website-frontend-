@@ -92,8 +92,8 @@ const SigninComponent = () => {
 
     return (
         <React.Fragment>
-            <div className="card" style={{ width: '100%',height: 'auto', marginLeft: 'auto', marginRight: 'auto', display: 'block' }}>
-                <div className="text-center pt-4 pb-4 text-muted display-3" style={{"font-size": '5vh'}}>Signin</div>
+            <div className="card" style={{ marginTop: '100px' ,maxWidth: '500px',height: 'auto', marginLeft: 'auto', marginRight: 'auto', display: 'block' }}>
+                <div className="text-center pt-4 pb-4 text-muted display-3" style={{fontSize: '5vh'}}>Signin</div>
                 <div className="card-body" >
                     {showError()}
                     {showLoading()}

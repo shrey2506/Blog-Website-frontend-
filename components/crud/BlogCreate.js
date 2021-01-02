@@ -109,16 +109,20 @@ const CreateBlog = ({ router }) => {
             if (data.error) {
                 setValues({ ...values, error: data.error, loading:false });
             } 
-            setValues({ ...values,loading:false, title: '', error: '', success: `A new blog titled "${data.title}" is created` });
+
+            else{
+                setValues({ ...values,loading:false, title: '', error: '', success: `A new blog titled "${data.title}" is created` });
                 setBody('');  
           
-            if (isAuth() && isAuth().role === 1) {
-                // Router.replace(`/admin/crud/${router.query.slug}`);
-                Router.replace(`/admin`);
-            } else if (isAuth() && isAuth().role === 0) {
-                // Router.replace(`/user/crud/${router.query.slug}`);
-                Router.replace(`/user`);
+                if (isAuth() && isAuth().role === 1) {
+                    // Router.replace(`/admin/crud/${router.query.slug}`);
+                    Router.replace(`/admin`);
+                } else if (isAuth() && isAuth().role === 0) {
+                    // Router.replace(`/user/crud/${router.query.slug}`);
+                    Router.replace(`/user`);
+                }
             }
+           
         });
     };
 

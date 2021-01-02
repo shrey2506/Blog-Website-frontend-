@@ -24,8 +24,8 @@ import { API } from '../../config';
                 <div className="lead pb-4">
                     <header>
                         <Link href={`/blogs/${blog.slug}`}>
-                            <a>
-                                <h2 className="pt-3 pb-3 font-weight-bold">{blog.title}</h2>
+                            <a style={{textDecoration: 'none'}}>
+                                <h2 className="pt-3 pb-3 font-weight-bold" >{blog.title}</h2>
                             </a>
                         </Link>
                     </header>
@@ -33,7 +33,7 @@ import { API } from '../../config';
                         <p className="mark ml-1 pt-2 pb-2">
                         Written by  
                             <Link href={`/profile/${blog.postedBy.username}`}>
-                                <a> {blog.postedBy.username} </a>  
+                                <a style={{textDecoration: 'none'}}> {blog.postedBy.username} </a>  
                             </Link>  | Published {moment(blog.updatedAt).from()}
                         </p>
                     </section>
